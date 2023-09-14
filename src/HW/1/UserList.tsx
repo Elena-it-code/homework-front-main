@@ -7,7 +7,7 @@ export type UserType = { // ПРИДЕТСЯ САМОМУ)
     id: number
     name: string
     age: number
-    address: AddressType
+    address: any
 };
 
 export type UserListPropsType = {
