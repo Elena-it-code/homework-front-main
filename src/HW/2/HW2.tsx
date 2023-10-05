@@ -1,20 +1,22 @@
-import { useState } from 'react';
-import { UserList2 } from './UserList2';
+// @ts-ignore
 
-export type AddressType = {
+import {useState} from 'react';
+import {UserList2} from './UserList2';
+
+export type AddressType = { //типизация для объекта address
   street: string;
   city: string;
 };
 
-export type UserType = {
+export type UserType = { // типизация для массива myFriends
   id: number;
   name: string;
   age: number;
-  address: any; // пропиши типизацию
+  address: AddressType // пропиши типизацию
 };
 
-export type UsersObjectType = {
-  myFriends: any; // пропиши типизацию
+export type UsersObjectType = { // типизация для user
+  myFriends: Array<UserType> // пропиши типизацию
 };
 
 export const HW2 = () => {
@@ -29,7 +31,7 @@ export const HW2 = () => {
 
   // ❗ Массив с данными не трогаем!
 
-  const users = {
+  const users: UsersObjectType = {
     myFriends:[
       { id: 1, name: 'John', age: 25, address: { street: '123 Main St', city: 'New York' } },
       { id: 2, name: 'Alice', age: 30, address: { street: '456 Elm St', city: 'San Francisco' } },
@@ -45,15 +47,14 @@ export const HW2 = () => {
   }
 
   let [currentUsers, setCurrentUsers] = useState<UsersObjectType>(users);
-
   const filterUsers = () => {
-    const filteredUsers = 'НУЖНО ПРОФИЛЬТРОВАТЬ ДРУЗЕЙ. ОСТАВЛЯЕМ ТОЛЬКО ТЕХ, КОТОРЫЕ ЖИВУТ В ГОРОДЕ LOS ANGELES';
+    const filteredUsers = currentUsers.myFriends.filter(el => el.address.city === 'Los Angeles');
     setCurrentUsers({ myFriends: filteredUsers });
   };
+  
 
   return (
     <div id={'hw02'}>
       <UserList2 users={currentUsers} filterUsers={filterUsers} />
     </div>
-  );
-};
+  )};
